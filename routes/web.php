@@ -6,9 +6,7 @@ use App\Http\Controllers\Admin\Educational\CommentController;
 use App\Http\Controllers\Admin\Educational\CourseController;
 use App\Http\Controllers\Admin\Educational\DiscountController;
 use App\Http\Controllers\Admin\Educational\lessonController;
-use App\Http\Controllers\Admin\Educational\OrderController;
 use App\Http\Controllers\Admin\Educational\PaymentController;
-use App\Http\Controllers\Admin\Educational\StoreController;
 use App\Http\Controllers\Admin\Notify\EmailController;
 use App\Http\Controllers\Admin\Notify\EmailFileController;
 use App\Http\Controllers\Admin\Notify\SMSController;
@@ -16,6 +14,7 @@ use App\Http\Controllers\Admin\Setting\SettingController;
 use App\Http\Controllers\Admin\Ticket\TicketCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketController;
 use App\Http\Controllers\Admin\User\TeacherController;
+use App\Http\Controllers\Customer\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -223,3 +222,5 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
     });
 
 });
+
+Route::get('/', [HomeController::class, 'index'])->name('customer.home');

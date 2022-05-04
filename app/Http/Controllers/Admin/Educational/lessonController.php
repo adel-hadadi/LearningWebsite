@@ -7,7 +7,9 @@ use App\Http\Requests\Admin\Educational\LessonRequest;
 use App\Http\Services\File\FileService;
 use App\Models\Educational\Course;
 use App\Models\Educational\CourseLesson;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
 class lessonController extends Controller
@@ -41,7 +43,7 @@ class lessonController extends Controller
      */
     public function store(LessonRequest $request, FileService $fileService, Course $course)
     {
-        $inputs = $request->all();
+        $inputs = $request->all();        
         if($request->hasFile('files')){
             $fileService->setExclusiveDirectory('courses' . DIRECTORY_SEPARATOR . 'lesson-files');
             $fileService->setFileSize($request->file('files')); 

@@ -21,9 +21,7 @@ class CreateCoursesTable extends Migration
             $table->text('summary');
             $table->decimal('price', 20,2);
             $table->text('video');
-            $table->bigInteger('cource_code')->unique();
-            $table->tinyInteger('cource_size');
-            $table->foreignId('cource_type_id')->constrained('course_types')->onUpdate('cascade')->onDelete('cascade');
+            $table->tinyInteger('cource_size')->default(0);
             $table->foreignId('teacher_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('categories')->onUpdate('cascade')->onDelete('cascade');
             $table->tinyInteger('status')->default(0);

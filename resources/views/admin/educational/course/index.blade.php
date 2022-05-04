@@ -61,7 +61,7 @@
                                     <td>{{ $course->price }} تومان</td>
                                     <td>{{ $course->slug }}</td>
                                     <td>{{ $course->tags }}</td>
-                                    <td>{{ $course->teacher->name }}</td>
+                                    <td>{{ $course->teacher->first_name . $course->teacher->last_name }}</td>
                                     <td>{{ $course->category->name }}</td>
                                     <td>
                                         <label>

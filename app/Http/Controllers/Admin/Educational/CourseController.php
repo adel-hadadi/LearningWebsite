@@ -10,7 +10,9 @@ use App\Http\Services\Video\VideoService;
 use App\Models\Educational\Category;
 use App\Models\Educational\Course;
 use App\Models\Educational\CourseType;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class CourseController extends Controller
 {
@@ -33,8 +35,7 @@ class CourseController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $course_types = CourseType::all();
-        return view('admin.educational.course.create', compact('categories', 'course_types'));
+        return view('admin.educational.course.create', compact('categories'));
     }
 
     /**
@@ -96,7 +97,6 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         $categories = Category::all();
-        $course_types = CourseType::all();
         return view('admin.educational.course.edit', compact('course', 'categories', 'course_types'));
     }
 

@@ -9,8 +9,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item font-size-12"> <a href="#">خانه</a></li>
-            <li class="breadcrumb-item font-size-12"> <a href="#">بخش فروش</a></li>
-            <li class="breadcrumb-item font-size-12"> <a href="#">کالا</a></li>
+            <li class="breadcrumb-item font-size-12"> <a href="#">بخش آموزش</a></li>
 
             <li class="breadcrumb-item font-size-12 active" aria-current="page"> آموزش جدید</li>
         </ol>
@@ -120,27 +119,6 @@
 
                             <section class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label class=" form-label">نوع آموزش</label>
-                                    <select name="course_type_id" id="" class="form-control form-control-sm">
-                                        <option selected>دسته را انتخاب کنید</option>
-                                        @foreach ($course_types as $course_type)
-                                            <option value="{{ $course_type->id }}" @if (old('course_type_id') == $course_type->id) selected  @endif>
-                                                {{ $course_type->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                @error('course_type_id')
-                                    <span class="alert-requird bg-danger text-white p-1 rounded" role="alert">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
-                            </section>
-
-
-                            <section class="col-12 col-md-6">
-                                <div class="form-group">
                                     <label class="form-label" for="tags">تگ ها</label>
                                     <input type="hidden" class="form-control form-control-sm" name="tags" id="tags"
                                         value="{{ old('tags') }}">
@@ -170,7 +148,7 @@
                                 @enderror
                             </section>
 
-                            <section class="col-12">
+                            <section class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="">تاریخ انتشار</label>
                                     <input type="text" name="published_at" id="published_at"
