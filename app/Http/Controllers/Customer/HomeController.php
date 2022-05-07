@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Educational\Category;
+use App\Models\Educational\Collection;
 use App\Models\Educational\Course;
 use Illuminate\Http\Request;
 
@@ -23,8 +24,9 @@ class HomeController extends Controller
         *   get 10 most popular courses with downloaded limit
         */
 
+        $collections = Collection::orderBy('students_count', 'desc')->withCount('courses')->get();
         $newFreeCourses = Course::wherePrice(0)->whereApproved(1)->orderBy('created_at', 'desc')->take(10)->get();
-        return view('customer.index', compact('categories', 'courses', 'newFreeCourses'));
+        return view('customer.index', compact('categories', 'courses', 'newFreeCourses', 'collections'));
     }
 
     /**

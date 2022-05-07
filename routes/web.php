@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\Educational\CategoryController;
+use App\Http\Controllers\Admin\Educational\CollectionController;
 use App\Http\Controllers\Admin\Educational\CommentController;
 use App\Http\Controllers\Admin\Educational\CourseController;
 use App\Http\Controllers\Admin\Educational\DiscountController;
@@ -112,10 +113,22 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/approved/{course}', [CourseController::class , 'approved'])->name('admin.educational.course.approved');
             Route::get('/create', [CourseController::class, 'create'])->name('admin.educational.course.create');
             Route::post('/store', [CourseController::class, 'store'])->name('admin.educational.course.store');
-            Route::get('/edit/{cours}', [CourseController::class, 'edit'])->name('admin.educational.course.edit');
-            Route::put('/update/{cours}', [CourseController::class, 'update'])->name('admin.educational.course.update');
-            Route::delete('/delete/{cours}', [CourseController::class, 'destroy'])->name('admin.educational.course.destroy');
-            Route::get('/status/{cours}', [CourseController::class, 'status'])->name('admin.educational.course.status');
+            Route::get('/edit/{course}', [CourseController::class, 'edit'])->name('admin.educational.course.edit');
+            Route::put('/update/{course}', [CourseController::class, 'update'])->name('admin.educational.course.update');
+            Route::delete('/delete/{course}', [CourseController::class, 'destroy'])->name('admin.educational.course.destroy');
+            Route::get('/status/{course}', [CourseController::class, 'status'])->name('admin.educational.course.status');
+        });
+        //--------------------------------------------------------------------------
+        
+        //cource 
+
+        Route::prefix('collection')->group(function () {
+            Route::get('/', [CollectionController::class, 'index'])->name('admin.educational.collection.index');
+            Route::get('/create', [CollectionController::class, 'create'])->name('admin.educational.collection.create');
+            Route::post('/store', [CollectionController::class, 'store'])->name('admin.educational.collection.store');
+            Route::get('/edit/{collection}', [CollectionController::class, 'edit'])->name('admin.educational.collection.edit');
+            Route::put('/update/{collection}', [CollectionController::class, 'update'])->name('admin.educational.collection.update');
+            Route::delete('/delete/{collection}', [CollectionController::class, 'destroy'])->name('admin.educational.collection.destroy');
         });
         //--------------------------------------------------------------------------
         

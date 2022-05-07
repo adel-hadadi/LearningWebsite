@@ -47,6 +47,7 @@
                                     </span>
                                 @enderror
                             </section>
+                            
                             <section class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label class=" form-label">دسته بندی</label>
@@ -66,6 +67,26 @@
                                     </span>
                                 @enderror
                             </section>
+                            
+                            <section class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label class=" form-label">کالکشن</label>
+                                    <select name="collection_id" id="" class="form-control form-control-sm">
+                                        @foreach ($collections as $collection)
+                                            <option value="{{ $collection->id }}" @if (old('collection_id') == $collection->id) selected  @endif>
+                                                {{ $collection->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('collection_id')
+                                    <span class="alert-requird bg-danger text-white p-1 rounded" role="alert">
+                                        <strong>
+                                            {{ $message }}
+                                        </strong>
+                                    </span>
+                                @enderror
+                            </section>
+                            
                             <section class="col-12 col-md-6">
                                 <div class="form-group">
 

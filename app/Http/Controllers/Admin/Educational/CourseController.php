@@ -6,13 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Educational\CourseRequest;
 use App\Http\Services\File\FileService;
 use App\Http\Services\Image\ImageService;
-use App\Http\Services\Video\VideoService;
 use App\Models\Educational\Category;
+use App\Models\Educational\Collection;
 use App\Models\Educational\Course;
-use App\Models\Educational\CourseType;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
 
 class CourseController extends Controller
 {
@@ -35,7 +32,8 @@ class CourseController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.educational.course.create', compact('categories'));
+        $collections = Collection::all();
+        return view('admin.educational.course.create', compact('categories', 'collections'));
     }
 
     /**
@@ -97,7 +95,8 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         $categories = Category::all();
-        return view('admin.educational.course.edit', compact('course', 'categories', 'course_types'));
+        $collections = Collection::all();
+        return view('admin.educational.course.edit', compact('course', 'categories', 'collections'));
     }
 
     /**
@@ -107,9 +106,18 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CourseRequest $request, Course $course)
     {
-        //
+        $inputs = $request->all();
+        
+        //fix date
+        $realTimestampStart = substr($request->published_at, 0, 10);
+        $inputs['published_at'] = date("Y-m-d H:i:s", (int)$realTimestampStart);
+
+        $inputs['collection_id'] = (int)$inputs['collection_id'];
+        $course->update($inputs);
+
+        return redirect()->route('admin.educational.course.index')->with('swal-success', 'آموزش با موفقیت ویرایش شد');
     }
 
     /**

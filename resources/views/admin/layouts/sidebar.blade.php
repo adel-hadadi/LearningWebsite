@@ -27,6 +27,11 @@
                 <span>پرداخت ها</span>
             </a>
            
+           <a href="{{ route('admin.educational.collection.index') }}" class="sidebar-link">
+                <i class="fas fa-bars"></i>
+                <span>کالکشن ها</span>
+            </a>
+           
             <section class="sidebar-group-link">
                 <section class="sidebar-dropdown-toggle">
                     <i class="fas fa-chart-bar icon"></i>

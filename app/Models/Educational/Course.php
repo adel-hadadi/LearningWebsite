@@ -3,7 +3,6 @@
 namespace App\Models\Educational;
 
 use App\Models\User;
-use App\Models\User\Teacher;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,7 +22,7 @@ class Course extends Model
     }
     protected $casts = ['image' => 'array'];
     protected $fillable = ['title', 'image', 'description', 'summary', 'price', 'video', 'cource_size',
-     'teacher_id', 'category_id', 'status', 'slug', 'tags', 'published_at'];
+     'teacher_id', 'category_id', 'status', 'slug', 'tags', 'collection_id', 'published_at'];
 
 
     public function teacher(){
@@ -32,5 +31,9 @@ class Course extends Model
 
     public function category(){
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function collection(){
+        return $this->belongsTo(Collection::class);
     }
 }

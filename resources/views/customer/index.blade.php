@@ -317,13 +317,13 @@
             <div class="row">
                 <div class="col-12 col-lg-6 learning-path-item">
                     
-                    @foreach ($categories as $category)
+                    @foreach ($collections as $collection)
                         <a href="#">
                             <img src="assets/images/programming.svg.svg" alt="">
                             <div class="information">
                                 <h4></h4>
                                 <ul class="d-flex justify-content-between">
-                                    <li>48 آموزش</li>
+                                    <li>{{ $collection->courses_count }} آموزش</li>
                                     <li>436 ساعت</li>
                                     <li>270,000 دانشجو</li>
                                 </ul>

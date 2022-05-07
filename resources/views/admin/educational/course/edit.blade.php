@@ -1,6 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('head-tag')
+    <link rel="stylesheet" href="{{ asset('admin-assets/jalalidatepicker/persian-datepicker.min.css') }}">
     <title>ویرایش آموزش</title>
 @endsection
 
@@ -21,7 +22,7 @@
             <section class="main-body-container">
                 <section class="main-body-container-header">
                     <h5>
-                        ویرایش آموزش
+                        آموزش جدید
                     </h5>
                 </section>
 
@@ -48,6 +49,7 @@
                                     </span>
                                 @enderror
                             </section>
+                            
                             <section class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label class=" form-label">دسته بندی</label>
@@ -67,6 +69,26 @@
                                     </span>
                                 @enderror
                             </section>
+                            
+                            <section class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label class=" form-label">کالکشن</label>
+                                    <select name="collection_id" id="" class="form-control form-control-sm">
+                                        @foreach ($collections as $collection)
+                                            <option value="{{ $collection->id }}" @if (old('collection_id', $collection->collection_id) == $collection->id) selected  @endif>
+                                                {{ $collection->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('collection_id')
+                                    <span class="alert-requird bg-danger text-white p-1 rounded" role="alert">
+                                        <strong>
+                                            {{ $message }}
+                                        </strong>
+                                    </span>
+                                @enderror
+                            </section>
+                            
                             <section class="col-12 col-md-6">
                                 <div class="form-group">
 
@@ -76,7 +98,7 @@
                                         <option value="0" @if (old('status', $course->status) == 0)
                                             selected
                                             @endif>غیر فعال</option>
-                                        <option value="1" @if (old('status', $course->status) == 1)
+                                        <option value="1" @if (old('status') == 1)
                                             selected
                                             @endif>فعال</option>
                                     </select>
@@ -120,27 +142,6 @@
 
                             <section class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label class=" form-label">نوع آموزش</label>
-                                    <select name="course_type_id" id="" class="form-control form-control-sm">
-                                        <option selected>دسته را انتخاب کنید</option>
-                                        @foreach ($course_types as $course_type)
-                                            <option value="{{ $course_type->id }}" @if (old('course_type_id', $course->course_type_id) == $course_type->id) selected  @endif>
-                                                {{ $course_type->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                @error('course_type_id')
-                                    <span class="alert-requird bg-danger text-white p-1 rounded" role="alert">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
-                            </section>
-
-
-                            <section class="col-12 col-md-6">
-                                <div class="form-group">
                                     <label class="form-label" for="tags">تگ ها</label>
                                     <input type="hidden" class="form-control form-control-sm" name="tags" id="tags"
                                         value="{{ old('tags', $course->tags) }}">
@@ -163,6 +164,23 @@
                                 </div>
                                 @error('video')
                                     <span class="alert-requird bg-danger text-white p-1 rounded" role="alert">
+                                        <strong>
+                                            {{ $message }}
+                                        </strong>
+                                    </span>
+                                @enderror
+                            </section>
+
+                            <section class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="">تاریخ انتشار</label>
+                                    <input type="text" name="published_at" id="published_at"
+                                        class="form-control form-control-sm d-none" value="{{ old('published_at', $course->published_at) }}">
+                                    <input type="text" id="published_at_view" class="form-control form-control-sm"
+                                        value="{{ old('published_at', $course->published_at) }}">
+                                </div>
+                                @error('published_at')
+                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
                                         <strong>
                                             {{ $message }}
                                         </strong>
@@ -214,6 +232,7 @@
                                     </span>
                                 @enderror
                             </section>
+
                         </section>
                         <button type="submit" class="btn btn-primary btn-sm">ثبت</button>
 
@@ -227,6 +246,8 @@
 
 @section('script')
 
+<script src="{{ asset('admin-assets/jalalidatepicker/persian-date.min.js') }}"></script>
+<script src="{{ asset('admin-assets/jalalidatepicker/persian-datepicker.min.js') }}"></script>
     <script src="{{ asset('admin-assets/ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace('description');
@@ -268,4 +289,19 @@
             });
         })
     </script>
+
+<script>
+    $(document).ready(function() {
+        $('#published_at_view').persianDatepicker({
+            format: 'YYYY/MM/DD',
+            altField: '#published_at',
+            timePicker: {
+                enabled: true,
+                meridiem: {
+                    enabled: true
+                }
+            }
+        });
+    });
+</script>
 @endsection

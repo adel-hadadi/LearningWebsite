@@ -44,6 +44,7 @@
                                 <th scope="col">برچسب ها</th>
                                 <th scope="col">مدرس</th>
                                 <th scope="col">دسته بندی</th>
+                                <th scope="col">کالکشن</th>
                                 <th scope="col">وضعیت</th>
                                 <th class="max-width-16-rem text-center" scope="col"><i class="fa fa-cogs"></i> تنظیمات
                                 </th>
@@ -63,6 +64,7 @@
                                     <td>{{ $course->tags }}</td>
                                     <td>{{ $course->teacher->first_name . $course->teacher->last_name }}</td>
                                     <td>{{ $course->category->name }}</td>
+                                    <td>{{ $course->collection ? $course->collection->title : 'کالکشنی پیدا نشد' }}</td>
                                     <td>
                                         <label>
                                             <input id="{{ $course->id }}" onchange="changeStatus({{ $course->id }})"

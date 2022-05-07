@@ -24,6 +24,7 @@ class CreateCoursesTable extends Migration
             $table->tinyInteger('cource_size')->default(0);
             $table->foreignId('teacher_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('categories')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('collection_id')->constrained('collections')->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->string('slug')->unique()->nullable();
             $table->string('tags');
